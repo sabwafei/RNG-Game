@@ -3,8 +3,9 @@ package main;
 public class Controller {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		//testing of the item class
+		Item item1 = new Item();
+		System.out.println(item1.toString());
 	}
 
 }
