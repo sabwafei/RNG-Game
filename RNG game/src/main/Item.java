@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Random;
+
 public class Item {
 	// item class attributes
 	private String itemName;
@@ -8,8 +10,8 @@ public class Item {
 	int rarityCode; // 0-common, 1-uncommon, 2-rare, 3-legendary, 4-exotic
 	private String rarityName; // 0-common, 1-uncommon, 2-rare, 3-legendary, 4-exotic
 	
-	// "id" used to move arrayList element(inventory item) between inventories(player and prizePool)
-	public int id;
+	// "id" used to identify arraylist item
+	public String id = "For Sale";
 
 	// Default constructor randomizes ITEM attributes to create item with simple
 	// attributes
@@ -17,7 +19,7 @@ public class Item {
 		// simple attributes
 		String[] simpleNames = { "Common Item", "Uncommon Item", "Rare Item", "Legendary Item", "Exotic Item" };
 		String[] simpleDesc = { "A COMMON item", "An UNCOMMON item", "A RARE item", "A LEGENDARY item",
-				" An EXOTIC item " };
+				"An EXOTIC item" };
 		// simple rarity code
 		int[] simpleRarity = { 0, 1, 2, 3, 4 };
 		// simple rarity name
@@ -92,14 +94,27 @@ public class Item {
 		this.rarityName = rarityName;
 	}
 	
-	public void setId(int newId) {
+	public void setId(String newId) {
 		this.id = newId;
 	}
 
 	// toString method used for testing
 	public String toString() {
 		return "Name: " + this.itemName + "| Description: " + this.itemDesc + "| Price: " + this.price
-				+ "| Rarity Level: " + this.rarityName;
+				+ "| Rarity Level: " + this.rarityName + "| ID: " + this.id;
+	}
+
+	public String createId() {
+		//Creates a random 5 letter id that will be used by the player to select item in PLAYER inventory
+		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 4) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
 	}
 
 }
