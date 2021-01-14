@@ -7,6 +7,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Player {
 	// player attributes are
@@ -70,30 +71,57 @@ public class Player {
 
 			// if conditions are met select item to sell
 		} else if (playerInventory != null && this.points > 10) {
-			System.out.println("Choose Which Inventory Item to sell:");
+			System.out.println("Choose Which Inventory Item to sell(Input item code):");
 			System.out.println(playerInventory);
+			System.out.println(getPoints());
+
 
 			// get player input
+			Scanner reader = new Scanner(System.in);
+			String userChoice = reader.nextLine();
 
-			// compare player input to player inventory.
+			// search player inventory and find matching code
+			for (int i = 0; i < playerInventory.size();) {
+				System.out.println(userChoice);
+				if (playerInventory.get(i).id.contains(userChoice)) {
 
-			// if not found, prompt player
+					// if found add sell price of item to player inventory
+					addPoints(playerInventory.get(i).price);
+					
+					// remove selected item from player inventory
+					playerInventory.remove(i);
+					
+					//close the scanner
+					reader.close();
 
-			// if found remove item from player inventory and it back to item inventory
+					//exit loop
+					break;
+				}else {
+					System.out.println("Your inventory does not contain that item.");
+					reader.close();
 
-			// add sell price of item to player inventory
+					break;
+					
+				}		
+			}
+
 		}
 
 	}
 
-	public void viewPlayerInv() {
-		// TODO Auto-generated method stub
+	private void addPoints(int newPrice) {
+		// add sold item price to player point total
+		this.points = newPrice + this.points;
 
 	}
 
-	public void viewPrizePool() {
-		// TODO Auto-generated method stub
+	public void viewPlayerInv() {
+		System.out.println(playerInventory);
 
+	}
+
+	public void viewPrizePool(ArrayList<Item> prizePool) {
+		System.out.println(prizePool);
 	}
 
 }

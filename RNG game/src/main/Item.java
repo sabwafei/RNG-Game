@@ -24,7 +24,9 @@ public class Item {
 		int[] simpleRarity = { 0, 1, 2, 3, 4 };
 		// simple rarity name
 		String[] simpleRarityName = { " common ", " unommon ", " rare ", " legendary ", " exotic " };
-
+		
+		//assign a random id to the item
+		this.id = createId();
 		// RNG to determine which simple data to use
 		int min = 0;
 		int max = 4;
@@ -97,11 +99,15 @@ public class Item {
 	public void setId(String newId) {
 		this.id = newId;
 	}
+	
+	public String getId() {
+		return id;
+	}
 
 	// toString method used for testing
 	public String toString() {
 		return "Name: " + this.itemName + "| Description: " + this.itemDesc + "| Price: " + this.price
-				+ "| Rarity Level: " + this.rarityName + "| ID: " + this.id;
+				+ "| Rarity Level: " + this.rarityName + "| ID: " + this.id + "|";
 	}
 
 	public String createId() {
